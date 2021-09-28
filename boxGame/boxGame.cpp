@@ -12,7 +12,7 @@ int main() {
   //  printf("Error opening file unexist.ent: %s\n", strerror(errno));
   //  return -1;
   //}
-  ifstream fin("./input.txt");
+  ifstream fin("./easy/49.txt");
   if (!fin.is_open()) {
     cerr << "failed" << endl;
     return -1;
