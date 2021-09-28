@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 #include "Box.h"
 
 int main() {
@@ -12,7 +13,18 @@ int main() {
   //  printf("Error opening file unexist.ent: %s\n", strerror(errno));
   //  return -1;
   //}
-  ifstream fin("./expert/800.txt");
+  std::cout << "Current path is " << filesystem::current_path() << endl;
+  ifstream fin("./configuation.txt");
+  if (!fin.is_open()) {
+    cerr << "failed" << endl;
+    return -1;
+  }
+  string open_pth, save_pth;
+  fin >> open_pth;
+  fin >> save_pth;
+  fin.close();
+  fin.clear();
+  fin.open(open_pth);
   if (!fin.is_open()) {
     cerr << "failed" << endl;
     return -1;
@@ -31,7 +43,7 @@ int main() {
     bs.board.push_back(line);
   }
   auto result = bfs(bs);
-  ofstream fout("./answer.txt");
+  ofstream fout(save_pth);
   if (!(result.cur == point(-1, -1))) {
     for (int i = 0; i < result.ops.size(); i++) {
       if (result.ops[i] == point(0, 1)) {
