@@ -1,0 +1,14 @@
+1 5
+3
+2 3
+2 7
+7 1
+....wwwww
+..www...w
+..w..b..w
+..w..b.ww
+.www.www.
+ww.b..w..
+w.....w..
+w...www..
+wwwww....

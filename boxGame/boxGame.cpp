@@ -12,7 +12,7 @@ int main() {
   //  printf("Error opening file unexist.ent: %s\n", strerror(errno));
   //  return -1;
   //}
-  ifstream fin("./easy/49.txt");
+  ifstream fin("./expert/800.txt");
   if (!fin.is_open()) {
     cerr << "failed" << endl;
     return -1;
@@ -31,20 +31,38 @@ int main() {
     bs.board.push_back(line);
   }
   auto result = bfs(bs);
+  ofstream fout("./answer.txt");
   if (!(result.cur == point(-1, -1))) {
     for (int i = 0; i < result.ops.size(); i++) {
       if (result.ops[i] == point(0, 1)) {
         cout << "→" << endl;
+        fout << "→" << endl;
       } else if (result.ops[i] == point(1, 0)) {
         cout << "↓" << endl;
+        fout << "↓" << endl;
       } else if (result.ops[i] == point(0, -1)) {
         cout << "←" << endl;
+        fout << "←" << endl;
       } else if (result.ops[i] == point(-1, 0)) {
         cout << "↑" << endl;
+        fout << "↑" << endl;
       }
       bs.forward(result.ops[i]);
       cout << bs.toString() << endl;
+      fout << bs.toString() << endl;
     }
+    for (int i = 0; i < result.ops.size(); i++) {
+      if (result.ops[i] == point(0, 1)) {
+        fout << "→" << ' ';
+      } else if (result.ops[i] == point(1, 0)) {
+        fout << "↓" << ' ';
+      } else if (result.ops[i] == point(0, -1)) {
+        fout << "←" << ' ';
+      } else if (result.ops[i] == point(-1, 0)) {
+        fout << "↑" << ' ';
+      }
+    }
+    fout << endl;
   }
   return 0;
 }
